@@ -1,0 +1,8 @@
+# Local testing ONLY. Copy to .dev.vars, never commit or upload to cPanel.
+# Leave absent until you deliberately want to send data to your integration.
+# CRM_WEBHOOK_URL=https://your-crm.example/webhook
+# CRM_WEBHOOK_TOKEN=replace-locally
+# NOTIFICATION_WEBHOOK_URL=https://your-notifications.example/webhook
+# NOTIFICATION_WEBHOOK_TOKEN=replace-locally
+# AI_PROVIDER_URL=https://your-optional-ai-adapter.example/recommend
+# AI_PROVIDER_KEY=replace-locally

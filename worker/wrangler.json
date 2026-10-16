@@ -1,0 +1,68 @@
+{
+  "name": "cubeappmaker-api",
+  "main": "dist/index.js",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "no_bundle": true,
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "api.cubeappmaker.agency",
+      "custom_domain": true
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "vars": {
+    "ALLOWED_ORIGINS": "https://www.cubeappmaker.agency",
+    "AI_MODEL": "@cf/meta/llama-3.1-8b-instruct",
+    "AI_ENABLED": "true",
+    "AI_DAILY_LIMIT": "200",
+    "AI_BURST_LIMIT": "12"
+  },
+  "ratelimits": [
+    {
+      "name": "RECOMMEND_LIMITER",
+      "namespace_id": "4200101",
+      "simple": {
+        "limit": 6,
+        "period": 60
+      }
+    },
+    {
+      "name": "LEAD_LIMITER",
+      "namespace_id": "4200102",
+      "simple": {
+        "limit": 3,
+        "period": 60
+      }
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "AI_BUDGET",
+        "class_name": "AIBudget"
+      },
+      {
+        "name": "LEAD_LEDGER",
+        "class_name": "LeadLedger"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": [
+        "AIBudget",
+        "LeadLedger"
+      ]
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
