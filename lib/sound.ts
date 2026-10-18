@@ -18,6 +18,38 @@ export const SOUND_NAMES: SoundName[] = [
   "ai-result",
 ];
 export class SoundManager {
+  private clips = new Map<string, HTMLAudioElement>();
+  private cubeVisible = false;
+  private ambient: HTMLAudioElement | null = null;
+  private reduced() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
+  ui(name: "ui-click" | "ui-hover") {
+    if (!this.enabled || document.hidden) return;
+    const now = performance.now();
+    if (now - (this.last.get(name) ?? -1000) < (name === "ui-click" ? 45 : 130)) return;
+    this.last.set(name, now);
+    let clip = this.clips.get(name);
+    if (!clip) {
+      clip = new Audio(`/audio/${name}.mp3`);
+      clip.preload = "auto";
+      clip.volume = name === "ui-click" ? 0.3 : 0.18;
+      this.clips.set(name, clip);
+    }
+    clip.currentTime = 0;
+    void clip.play().catch(() => {});
+  }
+  cubeVisibility(visible: boolean) {
+    this.cubeVisible = visible;
+    this.syncAmbient();
+  }
+  private syncAmbient() {
+    const active = this.enabled && this.cubeVisible && !document.hidden && !this.reduced();
+    if (active) {
+      this.ambient ??= new Audio("/audio/cube-ambient.mp3");
+      this.ambient.loop = true;
+      this.ambient.volume = 0.12;
+      if (this.ambient.paused) void this.ambient.play().catch(() => {});
+    } else this.ambient?.pause();
+  }
   async preload() {
     if (!this.ctx) return [];
     return Promise.all(
@@ -79,7 +111,11 @@ export class SoundManager {
       }
       void this.ctx.resume();
       this.play("ai-activate");
-    } else if (this.ctx) void this.ctx.suspend();
+    } else {
+      if (this.ctx) void this.ctx.suspend();
+      for (const clip of this.clips.values()) { clip.pause(); clip.currentTime = 0; }
+    }
+    this.syncAmbient();
   }
   play(name: SoundName, intensity = 1) {
     if (!this.enabled || !this.ctx || !this.master || document.hidden) return;
@@ -176,6 +212,8 @@ export class SoundManager {
     osc.stop(t + d + 0.02);
   }
   visibility() {
+    this.syncAmbient();
+    if (document.hidden) for (const clip of this.clips.values()) clip.pause();
     if (!this.ctx) return;
     if (document.hidden) void this.ctx.suspend();
     else if (this.enabled) void this.ctx.resume();
@@ -184,9 +222,41 @@ export class SoundManager {
 export const sound = new SoundManager();
 export function useSoundEffects(enabled: boolean) {
   useEffect(() => {
+    const targetElement = (target: EventTarget | null) => target instanceof Element ? target : null;
+    const click = () => sound.ui("ui-click");
+    const hover = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      const target = targetElement(event.target);
+      const from = targetElement(event.relatedTarget);
+      const item = target?.closest("a, button, input, select, textarea, summary, [role='button'], [role='checkbox'], .cube-stage, #goals, #solutions, #builder, #projects");
+      if (item && (!from || !item.contains(from))) sound.ui("ui-hover");
+    };
+    const restore = () => {
+      try {
+        if (!sound.status().enabled && localStorage.getItem("cube-sound") === "true") sound.enable(true);
+      } catch {}
+    };
+    const cube = document.querySelector(".cube-stage");
+    const observer = new IntersectionObserver(([entry]) => sound.cubeVisibility(entry.isIntersecting), { threshold: 0.15 });
+    if (cube) observer.observe(cube);
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     const visibility = () => sound.visibility();
+    reduced.addEventListener("change", visibility);
+    document.addEventListener("click", click, true);
+    document.addEventListener("pointerover", hover, { passive: true });
+    document.addEventListener("pointerdown", restore, { once: true });
+    document.addEventListener("keydown", restore, { once: true });
     document.addEventListener("visibilitychange", visibility);
-    return () => document.removeEventListener("visibilitychange", visibility);
+    return () => {
+      document.removeEventListener("visibilitychange", visibility);
+      document.removeEventListener("click", click, true);
+      document.removeEventListener("pointerover", hover);
+      document.removeEventListener("pointerdown", restore);
+      document.removeEventListener("keydown", restore);
+      reduced.removeEventListener("change", visibility);
+      observer.disconnect();
+      sound.cubeVisibility(false);
+    };
   }, []);
   useEffect(() => {
     if (!enabled || matchMedia("(prefers-reduced-motion: reduce)").matches)

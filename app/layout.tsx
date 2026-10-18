@@ -1,3 +1,4 @@
+import SiteAudio from "@/components/SiteAudio";
 import type { Metadata } from "next";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
@@ -14,6 +15,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en" className="dark">
       <body data-analytics-provider={process.env.ANALYTICS_PROVIDER || "none"}>
         {children}
+        <SiteAudio />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

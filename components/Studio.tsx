@@ -58,7 +58,7 @@ import {
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import SalesAssistant from "./SalesAssistant";
-import { sound, useSoundEffects } from "@/lib/sound";
+import { sound } from "@/lib/sound";
 import type { CubeState } from "./three/CubeExperience";
 const Cube = lazy(() => import("./three/CubeExperience"));
 const goalIcons = [Users, Headset, Atom, ScanFace, Box, Workflow],
@@ -114,7 +114,6 @@ export default function Studio() {
     [enabled, setEnabled] = useState(false),
     [offset, setOffset] = useState(0);
   const technology = technologyFor(goal, selected);
-  useSoundEffects(enabled);
   useBuilderTools(setSelected);
   useEffect(() => {
     const restore = () => {
@@ -281,7 +280,7 @@ export default function Studio() {
                 className="cube-stage"
                 onPointerEnter={() => {
                   if (state === "IDLE") setState("HOVER");
-                  sound.play("cube-hover");
+                  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) sound.play("cube-hover", 1);
                 }}
                 onPointerLeave={() => {
                   if (state === "HOVER") setState("IDLE");
