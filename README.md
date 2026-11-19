@@ -1,26 +1,14 @@
-# CubeAppMaker — Coolify
+# CubeAppMaker — Hostinger + Coolify
 
-Статический frontend на Next.js/React/Three.js, контейнер Nginx. API с native Workers AI остаётся Cloudflare Worker в `worker/`. Coolify не исполняет Cloudflare bindings. Утверждённый UI и исходный GLB сохранены.
+Full-stack Next.js standalone on Node.js 24 LTS. Frontend, SSR/SSG and `/api/*` run in one non-root container on port 3000. No Cloudflare runtime or static export required. Approved UI, Three.js, audio and assets are preserved.
 
-## Установка в Coolify
+- [Installation / Coolify / rollback (Russian)](INSTALL-COOLIFY-RU.md)
+- [Pre-migration audit](docs/AUDIT-HOSTINGER-RU.md)
+- [Verification report](docs/VERIFICATION-COOLIFY-RU.md)
+- [GitHub sync report](docs/GITHUB-SYNC.md)
+- Runtime variables: `.env.example` (no secrets)
+- Health: `/api/health/`; persistent volume: `/app/data` (UID 1000)
+- Build: `npm ci && npm run typecheck && npm run lint && npm test && npm run build`
+- Docker: `docker build -t cubeappmaker-node .`
 
-1. Подключите приватный GitHub-репозиторий через GitHub App или deploy key.
-2. Создайте Application, выберите ветку `main`, Build Pack **Dockerfile**, Base Directory `/`, Dockerfile `/Dockerfile`.
-3. Exposed Port: **80**, health check: GET `/healthz`, port 80.
-4. Build variable `NEXT_PUBLIC_API_BASE_URL=https://api.cubeappmaker.agency` (используется Docker ARG). Это публичный адрес; секреты здесь не задавать. После изменения нужен rebuild.
-5. Задайте домен `https://www.cubeappmaker.agency`. DNS www направьте на сервер Coolify; прежнюю привязку www к Worker/cPanel отключите только при переключении. Настройте TLS. api сохраняется на Cloudflare.
-6. Deploy. Проверьте главную, вложенные service/solution/project URL, GLB, звук и AI-форму. Для тестового домена добавьте точный origin в `worker/wrangler.json` и перепубликуйте API.
-
-## API
-
-Инструкции и секреты: `worker/SECRETS.md`. Из worker: `npm ci`, `npm run build`, `npm run check:deploy`, затем при готовности `npm run deploy`. Native Workers AI, CRM и секреты на Cloudflare. Пока API не опубликован/не настроен, полноценная работа интеграций не подтверждена. Не добавляйте секреты в Git или frontend.
-
-## Локальная проверка
-
-`npm ci`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`.
-
-Контейнер: `docker build -t cubeappmaker .` и `docker run --rm -p 8080:80 cubeappmaker`.
-
-Статические исходники ранее прошли build и 25 тестов. Docker/Coolify нужно проверить в доступном Docker runtime; этот репозиторий сам по себе ещё не означает выполненную публикацию.
-
-Документация Coolify: https://coolify.io/docs/applications/builds/dockerfile
+Cloudflare backend remains available as an optional alternative in `worker/`. Corporate email and DNS are outside this change. This branch is prepared for review; no production deployment has been performed.

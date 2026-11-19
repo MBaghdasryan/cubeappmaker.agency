@@ -1,0 +1,171 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 881B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/node:24-bookworm-slim
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 205B 0.1s done
+#3 DONE 0.1s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [build 1/6] FROM docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54
+#5 resolve docker.io/library/node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54 0.1s done
+#5 DONE 0.1s
+
+#4 [internal] load build context
+#4 transferring context: 15.40kB 1.5s done
+#4 DONE 1.5s
+
+#6 [build 2/6] WORKDIR /app
+#6 CACHED
+
+#7 [build 3/6] COPY package.json package-lock.json ./
+#7 CACHED
+
+#8 [build 4/6] RUN npm ci --no-audit
+#8 CACHED
+
+#9 [build 5/6] COPY . .
+#9 DONE 0.4s
+
+#10 [build 6/6] RUN npm run typecheck && npm run lint && npm test && npm run build
+#10 0.801 
+#10 0.801 > site-creator-vinext-starter@0.1.0 typecheck
+#10 0.801 > tsc --noEmit
+#10 0.801 
+#10 19.89 
+#10 19.89 > site-creator-vinext-starter@0.1.0 lint
+#10 19.89 > eslint . --ignore-pattern out --ignore-pattern .next --ignore-pattern worker/dist
+#10 19.89 
+#10 34.25 
+#10 34.25 > site-creator-vinext-starter@0.1.0 test
+#10 34.25 > node --experimental-transform-types --test --test-isolation=none tests/*.test.ts
+#10 34.25 
+#10 34.80 ✔ uploaded audio obeys mute, cube visibility, tab visibility and reduced motion (5.900842ms)
+#10 34.80 ✔ HYBRID API base is centralized and full-Worker relative mode remains supported (0.902599ms)
+#10 34.80 ✔ Workers AI structured binding success uses configurable model (4.764819ms)
+#10 34.80 (node:61) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+#10 34.80 (Use `node --trace-warnings ...` to show where the warning was created)
+#10 34.90 ✔ AI invalid output, quota failure and timeout end in GuidedProvider (102.715878ms)
+#10 35.07 ✔ optional HTTP provider is used after native AI failure, before guided (163.949742ms)
+#10 35.08 ✔ CORS handles exact origins and required preflight only (12.929307ms)
+#10 35.09 ✔ native binding limiter rejects before model inference and missing protection fails closed (7.374503ms)
+#10 35.09 ✔ global Durable Object AI budget enforces durable aggregate cap (2.980824ms)
+#10 35.11 ✔ Worker validates input, aliases, body size and AI fallback response (16.721819ms)
+#10 35.11 ✔ CRM and notification retain server-only auth and idempotency headers (3.890023ms)
+#10 35.13 ✔ LeadLedger persists success across instances, suppresses concurrent duplicates, allows failed retries (19.721947ms)
+#10 35.13 ✔ English and Russian support queries resolve to support (0.36524ms)
+#10 35.14 ✔ invalid email and oversized problem are rejected (1.828699ms)
+#10 35.15 ✔ parallel duplicate submissions reach CRM only once (17.994659ms)
+#10 35.15 ✔ failed delivery remains retryable (0.743181ms)
+#10 35.16 ✔ notification failure does not duplicate a delivered lead (1.272139ms)
+#10 35.16 ✔ cross-origin submissions are rejected (1.56717ms)
+#10 35.38 ✔ SQLite limits and lead delivery records survive connections and restarts (218.189745ms)
+#10 35.40 ✔ request body cap counts streamed UTF-8 bytes without Content-Length (20.725555ms)
+#10 35.42 ✔ Node API rejects cross-origin, missing origin, non-JSON and oversized input before storage (15.634001ms)
+#10 35.45 ✔ external Node AI returns structured output and falls back on upstream or schema failures (32.759965ms)
+#10 35.46 ✔ all states centralize behavior and only processing has stronger bloom/trails (0.927101ms)
+#10 35.46 ✔ pointer influence is smooth, bounded, strongest at the center (7.269091ms)
+#10 35.47 ✔ section interpolation visits every section without global scroll constants (4.109148ms)
+#10 35.47 ✔ one mesh never claims explode support, future segments remain opt-in (0.921801ms)
+#10 35.47 ✔ contextual technology responds to goal and component selection (1.056215ms)
+#10 35.47 ✔ all provider adapters map only safe properties (3.511669ms)
+#10 35.48 ✔ all SEO URLs and social images use the production domain (1.804686ms)
+#10 35.48 ✔ AI provider failures and invalid output never become successful recommendations (2.72858ms)
+#10 35.48 ✔ CRM and notification adapters expose unsuccessful HTTP delivery (3.123821ms)
+#10 35.49 ℹ tests 30
+#10 35.49 ℹ suites 0
+#10 35.49 ℹ pass 30
+#10 35.49 ℹ fail 0
+#10 35.49 ℹ cancelled 0
+#10 35.49 ℹ skipped 0
+#10 35.49 ℹ todo 0
+#10 35.49 ℹ duration_ms 1158.610507
+#10 35.74 
+#10 35.74 > site-creator-vinext-starter@0.1.0 build
+#10 35.74 > next build --webpack
+#10 35.74 
+#10 36.48 ▲ Next.js 16.4.6 (webpack)
+#10 36.51 ✓ Running next.config.mjs took 33ms
+#10 36.57 - Experiments (use with caution):
+#10 36.57   · cpus: 2
+#10 36.57 
+#10 36.64   Creating an optimized production build ...
+#10 77.01 ✓ Compiled successfully in 35.8s
+#10 77.01   Running TypeScript ...
+#10 93.05   Finished TypeScript in 16.0s ...
+#10 93.06   Collecting page data using 2 workers ...
+#10 97.55   Generating static pages using 2 workers (0/30) ...
+#10 98.69   Generating static pages using 2 workers (7/30) 
+#10 98.80   Generating static pages using 2 workers (14/30) 
+#10 98.84   Generating static pages using 2 workers (22/30) 
+#10 98.97 ✓ Generating static pages using 2 workers (30/30) in 1415ms
+#10 99.38   Finalizing page optimization ...
+#10 99.38   Collecting build traces ...
+#10 139.9 
+#10 139.9 Route (app)
+#10 139.9 ┌ ○ /
+#10 139.9 ├ ○ /_not-found
+#10 139.9 ├   /[category]
+#10 139.9 │ ├ ● /services
+#10 139.9 │ └ ● /solutions
+#10 139.9 ├   /[category]/[slug]
+#10 139.9 │ ├ ● /services/ai-agents
+#10 139.9 │ ├ ● /services/ai-automation
+#10 139.9 │ ├ ● /services/generative-ai-content
+#10 139.9 │ └ ● [+13 more paths]
+#10 139.9 ├ ƒ /api/health
+#10 139.9 ├ ƒ /api/leads
+#10 139.9 ├ ƒ /api/recommend
+#10 139.9 ├ ƒ /api/status
+#10 139.9 ├ ƒ /healthz
+#10 139.9 ├ ○ /projects
+#10 139.9 ├   /projects/[slug]
+#10 139.9 │ ├ ● /projects/travel-ai-platform
+#10 139.9 │ ├ ● /projects/telecom-support-automation
+#10 139.9 │ ├ ● /projects/ai-video-production-system
+#10 139.9 │ └ ● /projects/ai-crm-for-real-estate
+#10 139.9 ├ ○ /robots.txt
+#10 139.9 └ ○ /sitemap.xml
+#10 139.9 
+#10 139.9 
+#10 139.9 ○  (Static)   prerendered as static content
+#10 139.9 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+#10 139.9 ƒ  (Dynamic)  server-rendered on demand
+#10 139.9 
+#10 DONE 140.2s
+
+#6 [build 2/6] WORKDIR /app
+#6 CACHED
+
+#11 [runtime 3/6] COPY --from=build --chown=node:node /app/.next/standalone ./
+#11 DONE 1.3s
+
+#12 [runtime 4/6] COPY --from=build --chown=node:node /app/.next/static ./.next/static
+#12 DONE 0.5s
+
+#13 [runtime 5/6] COPY --from=build --chown=node:node /app/public ./public
+#13 DONE 0.6s
+
+#14 [runtime 6/6] RUN mkdir -p /app/data && chown node:node /app/data
+#14 DONE 1.0s
+
+#15 exporting to image
+#15 exporting layers
+#15 exporting layers 4.0s done
+#15 exporting manifest sha256:97ff592f0ecd367669f58e4786efc3d8af8584e36b15e1c71a3bc320c7a55fe6 0.0s done
+#15 exporting config sha256:51bf76af26ed611906a3aa50bd5b0e64edca155f59bae280dd1773618a165a4c 0.0s done
+#15 exporting attestation manifest sha256:1a6673a03215f9d61767e78f0b24d893c837c02b6107abbf30f4bf4371589ab3
+#15 exporting attestation manifest sha256:1a6673a03215f9d61767e78f0b24d893c837c02b6107abbf30f4bf4371589ab3 0.1s done
+#15 exporting manifest list sha256:fde16f7d775c9dcdc0a238876104d6d379a10b78e73db328009c5129807aaa09 0.1s done
+#15 naming to docker.io/library/cubeappmaker-node:verify
+#15 naming to docker.io/library/cubeappmaker-node:verify done
+#15 unpacking to docker.io/library/cubeappmaker-node:verify
+#15 unpacking to docker.io/library/cubeappmaker-node:verify 2.2s done
+#15 DONE 6.6s

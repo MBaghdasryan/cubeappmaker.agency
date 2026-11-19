@@ -1,0 +1,21 @@
+# Optional local/staging example. Coolify Dockerfile applications configure limits/storage in the UI.
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:3000:3000"
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data
+    volumes:
+      - cubeapp-data:/app/data
+    cpus: 2
+    mem_limit: 2g
+    pids_limit: 256
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  cubeapp-data:

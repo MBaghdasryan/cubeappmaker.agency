@@ -2,6 +2,15 @@ node_modules
 .next
 out
 .git
-worker
-.env*
+worker/node_modules
+worker/.wrangler
+worker/dist
+.env
+.env.*
+!.env.example
+.dev.vars*
+**/.dev.vars*
 *.tsbuildinfo
+data
+*.sqlite*
+*.log

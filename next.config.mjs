@@ -1,3 +1,15 @@
-const config = {output:'export',env:{NEXT_PUBLIC_API_BASE_URL:process.env.NEXT_PUBLIC_API_BASE_URL||'https://api.cubeappmaker.agency'},trailingSlash:true,images:{unoptimized:true},experimental:{cpus:2},typescript:{ignoreBuildErrors:false}};
-
+const config = {
+  output: "standalone",
+  trailingSlash: true,
+  images: { unoptimized: true },
+  experimental: { cpus: 2 },
+  poweredByHeader: false,
+  async headers() {
+    return [{ source: "/:path*", headers: [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "Content-Security-Policy", value: "object-src 'none'; base-uri 'self'; frame-ancestors 'none'" },
+    ] }];
+  },
+};
 export default config;

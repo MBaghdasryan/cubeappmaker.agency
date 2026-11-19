@@ -14,3 +14,6 @@ out/
 
 # Also exclude Windows junctions seen as links by WSL Git.
 node_modules
+
+/data/
+*.sqlite*
