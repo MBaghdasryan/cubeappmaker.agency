@@ -7,3 +7,7 @@
 @media(prefers-reduced-motion:reduce){.page *,.page *:before,.page *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.primary:hover{transform:none}}
 
 .activeVisual .liveCube{position:absolute;top:0;left:0;height:calc(100% - 75px)}.activeVisual:has(:global(.model-loaded)) .cubeArt{visibility:hidden}.activeVisual .cubeArt{pointer-events:none}
+
+/* U-ON Travel CRM exhibition project */
+.uonWrap{margin-top:24px}.uon{background:radial-gradient(ellipse at 18% 50%,#ef405a18,transparent 58%),#09172b}.uonContent{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px;align-items:center;margin-top:20px}.uonLogo{background:#fff;border-radius:16px;padding:22px;display:flex;align-items:center;justify-content:center;min-height:160px}.uonLogo img{width:100%;height:auto;object-fit:contain}.uonCopy .textLink{margin-top:18px}.uonNote{font-size:12px!important;color:#d9e6f2!important}
+@media(max-width:640px){.uonWrap{margin-top:18px}.uonContent{grid-template-columns:1fr;gap:22px}.uonLogo{min-height:120px;padding:16px}}
