@@ -3,6 +3,7 @@ export default function sitemap() {
   const base = "https://www.cubeappmaker.agency";
   return [
     "",
+    "/digitec2026",
     "/projects",
     "/projects/travel-ai-platform",
     "/projects/telecom-support-automation",

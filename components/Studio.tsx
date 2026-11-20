@@ -38,6 +38,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Brand from "./Brand";
+import DigiTecNotice from "./DigiTecNotice";
 import BusinessImpact from "./BusinessImpact";
 import { track } from "@/lib/analytics";
 import { technologyFor } from "@/lib/technology";
@@ -364,6 +365,7 @@ export default function Studio() {
               </div>
             </aside>
           </section>
+          <DigiTecNotice />
           <section className="panel goals" id="goals">
             <div className="section-heading">
               <div>
